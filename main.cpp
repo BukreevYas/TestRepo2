@@ -8,7 +8,13 @@ int** convert(const int* arr, size_t n, const size_t* sizes, size_t rows);
 
 int main()
 {
-  outputMatrix(matrix, rows, rowSizes);
+  const int arr[] = {5, 5, 5, 6, 6, 7};
+  const size_t rowSizes[] = {3, 2, 1};
+  size_t rows = 3;
+
+  int** matrix = convert((const int*)&arr, 6, (const size_t*)&rowSizes, 3);
+
+  outputMatrix(matrix, rows, (const size_t*)&rowSizes);
 
   destroyMatrix(matrix, rows);
 }

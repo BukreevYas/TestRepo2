@@ -1,8 +1,8 @@
 #include <iostream>
 
 int** makeMatrix(int rows, int cols);
-void destroyMatrix(int** matrix);
-void outputMatrix(const int* const* matrix):
+void destroyMatrix(int** matrix, int rows);
+void outputMatrix(const int* const* matrix);
 
 int main()
 {
@@ -21,4 +21,14 @@ int main()
   outputMatrix(matrix);
 
   destroyMatrix(matrix);
+}
+
+void destroyMatrix(int** matrix, int rows)
+{
+  for (size_t i = 0; i < rows; i++)
+  {
+    delete[] matrix[i];
+  }
+
+  delete[] matrix;
 }

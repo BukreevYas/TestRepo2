@@ -1,34 +1,35 @@
 #include <iostream>
 
-int** makeMatrix(int rows, int cols);
+int** makeMatrix(int rows, const size_t* rowSizes);
 void destroyMatrix(int** matrix, int rows);
-void inputMatrix(int** matrix, int rows, int cols);
-void outputMatrix(const int* const* matrix, int rows, int cols);
+void outputMatrix(const int* const* matrix, int rows, const size_t* rowSizes);
 
 int** convert(const int* arr, size_t n, const size_t* sizes, size_t rows);
 
 int main()
 {
+  outputMatrix(matrix, rows, rowSizes);
+
+  destroyMatrix(matrix, rows);
 }
 
 int** convert(const int* arr, size_t n, const size_t* rowSizes, size_t rows)
 {
   int** matrix = nullptr;
 
-  try
+  matrix = makeMatrix(rows, rowSizes);
+
+  size_t index = 0;
+  for (size_t i = 0; i < rows; i++)
   {
-    matrix = makeMatrix(rows, rowSizes);
+    for (size_t j = 0; j < rowSizes[i]; j++)
+    {
+      matrix[i][j] = arr[index];
+      index++;
+    }
   }
-  catch(const std::bad_alloc& e)
-  {
-    return 2;
-  }
 
-  // convert
-
-  outputMatrix(matrix, rows, rowSizes);
-
-  destroyMatrix(matrix, rows);
+  return matrix;
 }
 
 int** makeMatrix(int rows, const size_t* rowSizes)

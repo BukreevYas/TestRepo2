@@ -23,6 +23,26 @@ int main()
   destroyMatrix(matrix);
 }
 
+int** makeMatrix(int rows, int cols)
+{
+  int** matrix = new int*[rows];
+
+  for (size_t i = 0; i < rows; i++)
+  {
+    try
+    {
+      matrix[i] = new int[cols];
+    }
+    catch (const std::bad_alloc& e)
+    {
+      destroyMatrix(matrix, i);
+      throw;
+    }
+  }
+  
+  return matrix;
+}
+
 void destroyMatrix(int** matrix, int rows)
 {
   for (size_t i = 0; i < rows; i++)

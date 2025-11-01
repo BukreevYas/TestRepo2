@@ -5,35 +5,28 @@ void destroyMatrix(int** matrix, int rows);
 void inputMatrix(int** matrix, int rows, int cols);
 void outputMatrix(const int* const* matrix, int rows, int cols);
 
+int** convert(const int* arr, size_t n, const size_t* sizes, size_t rows);
+
 int main()
 {
-  int rows = 0, cols = 0;
-  std::cin >> rows >> cols;
+}
 
-  if (!std::cin)
-  {
-    return 1;
-  }
-
+int** convert(const int* arr, size_t n, const size_t* rowSizes, size_t rows)
+{
   int** matrix = nullptr;
 
   try
   {
-    matrix = makeMatrix(rows, cols);
+    matrix = makeMatrix(rows, rowSizes);
   }
   catch(const std::bad_alloc& e)
   {
     return 2;
   }
 
-  inputMatrix(matrix, rows, cols);
-  if (!std::cin)
-  {
-    destroyMatrix(matrix, rows);
-    return 1;
-  }
+  // convert
 
-  outputMatrix(matrix, rows, cols);
+  outputMatrix(matrix, rows, rowSizes);
 
   destroyMatrix(matrix, rows);
 }
@@ -82,7 +75,7 @@ void inputMatrix(int** matrix, int rows, int cols)
 void outputMatrix(const int* const* matrix, int rows, int cols)
 {
   std::cout << '\n';
-  
+
   for (size_t i = 0; i < rows; i++)
   {
     for (size_t j = 0; j < cols; j++)

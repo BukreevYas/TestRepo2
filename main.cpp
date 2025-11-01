@@ -71,7 +71,7 @@ void outputMatrix(const int* const* matrix, int rows, const size_t* rowSizes)
     for (size_t j = 0; j < rowSizes[i]; j++)
     {
       std::cout << matrix[i][j];
-      std::cout << (j == cols - 1 ? '\n' : ' ');
+      std::cout << (j == rowSizes[i] - 1 ? '\n' : ' ');
     }
   }
 }

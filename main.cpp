@@ -31,7 +31,7 @@ int** convert(const int* arr, size_t n, const size_t* rowSizes, size_t rows)
   destroyMatrix(matrix, rows);
 }
 
-int** makeMatrix(int rows, int cols)
+int** makeMatrix(int rows, const size_t* rowSizes)
 {
   int** matrix = new int*[rows];
 
@@ -39,7 +39,7 @@ int** makeMatrix(int rows, int cols)
   {
     try
     {
-      matrix[i] = new int[cols];
+      matrix[i] = new int[rowSizes[i]];
     }
     catch (const std::bad_alloc& e)
     {
@@ -61,24 +61,13 @@ void destroyMatrix(int** matrix, int rows)
   delete[] matrix;
 }
 
-void inputMatrix(int** matrix, int rows, int cols)
-{
-  for (size_t i = 0; i < rows; i++)
-  {
-    for (size_t j = 0; j < cols; j++)
-    {
-      std::cin >> matrix[i][j];
-    }
-  }
-}
-
-void outputMatrix(const int* const* matrix, int rows, int cols)
+void outputMatrix(const int* const* matrix, int rows, const size_t* rowSizes)
 {
   std::cout << '\n';
 
   for (size_t i = 0; i < rows; i++)
   {
-    for (size_t j = 0; j < cols; j++)
+    for (size_t j = 0; j < rowSizes[i]; j++)
     {
       std::cout << matrix[i][j];
       std::cout << (j == cols - 1 ? '\n' : ' ');

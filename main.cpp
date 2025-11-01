@@ -16,7 +16,14 @@ int main()
 
   int** matrix = nullptr;
 
-  matrix = makeMatrix(rows, cols);
+  try
+  {
+    matrix = makeMatrix(rows, cols);
+  }
+  catch(const std::bad_alloc& e)
+  {
+    return 2;
+  }
 
   outputMatrix(matrix);
 

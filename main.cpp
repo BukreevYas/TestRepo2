@@ -2,6 +2,7 @@
 
 int** makeMatrix(int rows, int cols);
 void destroyMatrix(int** matrix, int rows);
+void inputMatrix(int** matrix, int rows, int cols);
 void outputMatrix(const int* const* matrix);
 
 int main()
@@ -25,9 +26,16 @@ int main()
     return 2;
   }
 
+  inputMatrix(matrix, rows, cols);
+  if (!std::cin)
+  {
+    destroyMatrix(matrix, rows);
+    return 1;
+  }
+
   outputMatrix(matrix);
 
-  destroyMatrix(matrix);
+  destroyMatrix(matrix, rows);
 }
 
 int** makeMatrix(int rows, int cols)
@@ -58,4 +66,15 @@ void destroyMatrix(int** matrix, int rows)
   }
 
   delete[] matrix;
+}
+
+void inputMatrix(int** matrix, int rows, int cols)
+{
+  for (size_t i = 0; i < rows; i++)
+  {
+    for (size_t j = 0; j < cols; j++)
+    {
+      std::cin >> matrix[i][j];
+    }
+  }
 }
